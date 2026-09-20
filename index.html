@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dünya Döner Krotoszyn — Kebab, Burger, Tortilla</title>
+<meta name="description" content="Dünya Döner Krotoszyn — świeży kebab, burger i tortilla z kurczaka i 100% wołowiny. Ul. Koźmińska 22b, Krotoszyn. Zamówienia: 691 081 048.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   Dünya Döner Krotoszyn — stylesheet
+   Tokens (ciemna, premium — grafit + złoto):
+   --bg        #15161A  base page background (graphite)
+   --surface   #1E2025  card / alt-section surfaces
+   --surface-2 #262830  hover surfaces
+   --text      #EDE7D8  primary text (warm off-white)
+   --gold      #C9A34C  accent — buttons, prices, links
+   --gold-d    #A6813A  accent, darker (hover/active)
+   ========================================================= */
+
+:root{
+  --bg:        #15161A;
+  --surface:   #1E2025;
+  --surface-2: #262830;
+  --text:      #EDE7D8;
+  --text-70:   rgba(237,231,216,.72);
+  --text-45:   rgba(237,231,216,.45);
+  --gold:      #C9A34C;
+  --gold-d:    #A6813A;
+  --line:      rgba(237,231,216,.14);
+  --open:      #7E9C63;
+  --closed:    #A9694E;
+
+  --display: "Big Shoulders Display", sans-serif;
+  --body: "Archivo", sans-serif;
+
+  --container: 1120px;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; scroll-padding-top:88px; }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+
+img{ max-width:100%; display:block; }
+
+h1,h2,h3{
+  font-family:var(--display);
+  font-weight:800;
+  letter-spacing:.2px;
+  line-height:.95;
+  margin:0;
+  color:var(--text);
+}
+
+a{ color:inherit; text-decoration:none; }
+
+.wrap{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:0 24px;
+}
+
+.skip-link{
+  position:absolute; left:-999px; top:0;
+  background:var(--gold); color:var(--bg); padding:10px 16px; z-index:200;
+}
+.skip-link:focus{ left:16px; top:16px; }
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:11px 22px;
+  border-radius:2px;
+  font-weight:600;
+  font-size:.95rem;
+  border:1.5px solid transparent;
+  transition:background-color .15s ease, color .15s ease, border-color .15s ease;
+  white-space:nowrap;
+}
+.btn-primary{ background:var(--gold); color:var(--bg); }
+.btn-primary:hover{ background:var(--gold-d); }
+.btn-ghost{ border-color:currentColor; color:inherit; }
+.btn-ghost:hover{ background:rgba(255,255,255,.08); }
+.btn-lg{ padding:15px 28px; font-size:1.05rem; }
+
+/* ---------- header ---------- */
+.site-header{
+  position:sticky; top:0; z-index:100;
+  background:rgba(21,22,26,.88);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.header-inner{ position:relative; }
+.header-inner{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:20px; padding-top:12px; padding-bottom:12px;
+}
+.brand{ display:flex; align-items:center; gap:10px; }
+.brand-mark{ width:40px; height:40px; object-fit:cover; border-radius:4px; }
+.brand-name{
+  font-family:var(--display);
+  font-weight:800;
+  font-size:1.15rem;
+  line-height:1;
+  display:flex; flex-direction:column;
+}
+.brand-name em{
+  font-style:normal;
+  font-weight:600;
+  font-size:.62rem;
+  letter-spacing:1.5px;
+  color:var(--gold);
+  margin-top:2px;
+}
+.main-nav{ display:flex; gap:28px; }
+.main-nav a{ font-weight:600; font-size:.93rem; }
+.main-nav a:hover{ color:var(--gold); }
+
+.header-actions{ display:flex; align-items:center; gap:14px; }
+.status-pill{
+  display:flex; align-items:center; gap:7px;
+  font-size:.82rem; font-weight:600;
+  padding:6px 12px; border-radius:99px;
+  background:var(--surface); border:1px solid var(--line);
+}
+.status-pill .dot{ width:8px; height:8px; border-radius:50%; background:var(--text-45); }
+.status-pill.is-open .dot{ background:var(--open); }
+.status-pill.is-closed .dot{ background:var(--closed); }
+
+.nav-toggle{
+  display:none; flex-direction:column; justify-content:center; gap:5px;
+  width:38px; height:38px; background:none; border:none; cursor:pointer; padding:0;
+}
+.nav-toggle span{ height:2px; background:var(--text); border-radius:2px; }
+
+/* ---------- hero ---------- */
+.hero{ position:relative; color:var(--text); overflow:hidden; }
+.hero-media{ position:absolute; inset:0; }
+.hero-media img{ width:100%; height:100%; object-fit:cover; }
+.hero-scrim{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(15,16,20,.6) 0%, rgba(15,16,20,.78) 55%, rgba(15,16,20,.95) 100%);
+}
+.hero-inner{
+  position:relative;
+  padding:110px 24px 90px;
+  max-width:760px;
+}
+.hero-kicker{
+  font-weight:700; letter-spacing:.5px; font-size:.85rem;
+  color:var(--gold); margin:0 0 14px;
+}
+.hero-title{
+  font-size:clamp(2.6rem, 6vw, 4.6rem);
+  margin-bottom:20px;
+}
+.hero-lede{
+  font-size:1.1rem; max-width:52ch; color:rgba(255,252,244,.88);
+  margin:0 0 34px;
+}
+.hero-actions{ display:flex; gap:14px; flex-wrap:wrap; }
+
+/* ---------- facts strip ---------- */
+.facts-strip{ background:var(--surface); color:var(--text); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.facts-grid{
+  display:grid; grid-template-columns:repeat(3,1fr);
+  padding:30px 24px;
+  gap:20px;
+}
+.fact{ display:flex; flex-direction:column; gap:4px; text-align:center; }
+.fact-num{ font-family:var(--display); font-weight:800; font-size:2rem; color:var(--gold); }
+.fact-label{ font-size:.85rem; color:var(--text-70); max-width:22ch; margin:0 auto; }
+
+/* ---------- sections generic ---------- */
+.section{ padding:88px 0; }
+.section-head{ max-width:60ch; margin-bottom:44px; }
+.section-head h2{ font-size:clamp(2rem,4vw,2.7rem); margin-bottom:10px; }
+.section-head p{ color:var(--text-70); font-size:1.05rem; margin:0; }
+.section-head--light{ color:var(--text); }
+.section-head--light p{ color:var(--text-70); }
+
+/* ---------- menu ---------- */
+.menu-tabs{
+  display:flex; flex-wrap:wrap; gap:8px;
+  margin-bottom:36px;
+  border-bottom:1px solid var(--line);
+  padding-bottom:20px;
+}
+.menu-tab{
+  font-family:var(--body); font-weight:600; font-size:.92rem;
+  padding:9px 18px; border-radius:99px;
+  border:1.5px solid var(--line); background:var(--surface); color:var(--text);
+  cursor:pointer; transition:all .15s ease;
+}
+.menu-tab:hover{ border-color:var(--gold); }
+.menu-tab.is-active{ background:var(--gold); border-color:var(--gold); color:var(--bg); }
+
+.menu-panel{ display:none; }
+.menu-panel.is-active{ display:block; animation:fadeIn .25s ease; }
+@keyframes fadeIn{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
+
+.menu-cols{
+  display:grid; grid-template-columns:1fr 110px 110px;
+  padding:0 4px 10px;
+  font-size:.78rem; font-weight:700; letter-spacing:.4px;
+  color:var(--text-45);
+}
+.menu-cols span:nth-child(2), .menu-cols span:nth-child(3){ text-align:right; }
+
+.menu-list{ list-style:none; margin:0; padding:0; }
+.menu-list li{
+  display:grid; grid-template-columns:1fr 110px 110px;
+  align-items:baseline;
+  padding:16px 4px;
+  border-bottom:1px solid var(--line);
+  gap:8px;
+}
+.menu-list--single li{ grid-template-columns:1fr 90px; }
+.item-name{ font-weight:600; font-size:1.05rem; }
+.item-name em{ font-style:normal; font-weight:400; color:var(--text-45); font-size:.82rem; display:block; margin-top:2px; }
+.item-price{ font-family:var(--display); font-weight:700; font-size:1.15rem; text-align:right; color:var(--gold); }
+
+.menu-note{
+  margin-top:28px; padding-top:20px; border-top:1px dashed var(--line);
+  font-size:.92rem; color:var(--text-70);
+}
+
+/* ---------- gallery ---------- */
+.gallery-grid{
+  display:grid; grid-template-columns:1.3fr 1fr; gap:24px;
+}
+.gallery-item{ margin:0; position:relative; overflow:hidden; border-radius:4px; }
+.gallery-item img{ width:100%; height:100%; object-fit:cover; }
+.gallery-item--tall img{ aspect-ratio:4/5; }
+.gallery-item:not(.gallery-item--tall) img{ aspect-ratio:4/5; }
+.gallery-item figcaption{
+  position:absolute; left:0; right:0; bottom:0;
+  padding:20px 18px;
+  background:linear-gradient(180deg, transparent, rgba(15,16,20,.9));
+  color:var(--text); font-size:.92rem;
+}
+
+/* ---------- reviews ---------- */
+.reviews-section{ background:var(--surface); color:var(--text); }
+.reviews-track{
+  display:flex; gap:18px; overflow-x:auto;
+  padding:4px 24px 12px;
+  scroll-snap-type:x proximity;
+}
+.review-card{
+  flex:0 0 300px; scroll-snap-align:start;
+  background:var(--surface-2);
+  border:1px solid var(--line);
+  border-radius:4px;
+  padding:24px;
+}
+.review-stars{ color:var(--gold); letter-spacing:2px; margin-bottom:12px; font-size:.95rem; }
+.review-card p{ margin:0 0 16px; font-size:.98rem; color:var(--text-70); }
+.review-author{ font-weight:700; font-size:.88rem; margin:0 !important; color:var(--text) !important; }
+.review-author span{ font-weight:400; color:var(--text-45); }
+
+/* ---------- hours / contact ---------- */
+.hours-grid{ display:grid; grid-template-columns:1fr 1.15fr; gap:40px; }
+.hours-card h2, .contact-card h2{ font-size:1.8rem; margin-bottom:24px; }
+.contact-card{ background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:32px; }
+.hours-table{ width:100%; border-collapse:collapse; }
+.hours-table th, .hours-table td{
+  text-align:left; padding:12px 4px; border-bottom:1px solid var(--line);
+  font-weight:500; font-size:.98rem;
+}
+.hours-table th{ font-weight:600; }
+.hours-table tr.is-today th, .hours-table tr.is-today td{ color:var(--gold); font-weight:700; }
+
+.contact-list{ list-style:none; margin:0 0 24px; padding:0; display:flex; flex-direction:column; gap:16px; }
+.contact-label{ display:block; font-size:.78rem; font-weight:700; letter-spacing:.4px; color:var(--text-45); margin-bottom:3px; }
+.contact-value{ font-size:1.05rem; font-weight:600; }
+.contact-value a:hover{ color:var(--gold); }
+.contact-buttons{ display:flex; gap:12px; flex-wrap:wrap; margin-bottom:24px; }
+.map-embed{ border-radius:4px; overflow:hidden; border:1px solid var(--line); }
+.map-embed iframe{ width:100%; height:260px; border:0; display:block; }
+
+/* ---------- footer ---------- */
+.site-footer{ background:var(--bg); color:var(--text-70); padding:48px 0 24px; border-top:1px solid var(--line); }
+.footer-inner{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+  gap:24px; padding-bottom:28px; border-bottom:1px solid var(--line);
+}
+.brand--footer .brand-name{ color:var(--text); }
+.footer-nav{ display:flex; gap:22px; flex-wrap:wrap; }
+.footer-nav a:hover{ color:var(--gold); }
+.footer-contact{ display:flex; gap:18px; flex-wrap:wrap; font-size:.92rem; }
+.footer-contact a:hover{ color:var(--gold); }
+.footer-fine{ text-align:center; font-size:.8rem; color:var(--text-45); margin:20px 0 0; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 860px){
+  .main-nav{
+    display:none;
+    position:absolute; top:100%; left:0; right:0;
+    flex-direction:column; gap:0;
+    background:var(--surface); border-bottom:1px solid var(--line);
+    padding:8px 24px 16px;
+  }
+  .main-nav.is-open{ display:flex; }
+  .main-nav a{ padding:12px 0; border-bottom:1px solid var(--line); }
+  .main-nav a:last-child{ border-bottom:none; }
+  .nav-toggle{ display:flex; }
+  .facts-grid{ grid-template-columns:1fr; }
+  .gallery-grid{ grid-template-columns:1fr; }
+  .hours-grid{ grid-template-columns:1fr; }
+  .hero-inner{ padding:90px 20px 60px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  .menu-panel.is-active{ animation:none; }
+}
+
+</style>
+<link rel="icon" href="assets/images/logo.jpg">
+</head>
+<body>
+
+<a class="skip-link" href="#menu">Przejdź do menu</a>
+
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top">
+      <img src="assets/images/logo.jpg" alt="Dünya Döner Krotoszyn" class="brand-mark">
+      <span class="brand-name">Dünya Döner<em>Krotoszyn</em></span>
+    </a>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="#menu">Menu</a>
+      <a href="#galeria">Zdjęcia</a>
+      <a href="#opinie">Opinie</a>
+      <a href="#godziny">Godziny i dojazd</a>
+    </nav>
+
+    <div class="header-actions">
+      <span class="status-pill" id="statusPill"><span class="dot"></span><span id="statusText">Sprawdzam godziny…</span></span>
+      <a class="btn btn-primary" href="tel:691081048">Zadzwoń</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Otwórz menu nawigacji" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-media">
+      <img src="assets/images/skewer.jpg" alt="Mięso kebabowe obracające się na rożnie w Dünya Döner">
+      <div class="hero-scrim"></div>
+    </div>
+    <div class="wrap hero-inner">
+      <p class="hero-kicker">Krotoszyn, ul. Koźmińska 22b</p>
+      <h1 class="hero-title">Mięso kręci się<br>od trzynastej.</h1>
+      <p class="hero-lede">Kebab, burger i tortilla z kurczaka albo ze 100% wołowiny. Krojone na miejscu, podawane od razu — bez czekania, bez kompromisów.</p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn btn-primary btn-lg">Zobacz menu i ceny</a>
+        <a href="tel:691081048" class="btn btn-ghost btn-lg">📞 691 081 048</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRIP: quick facts -->
+  <section class="facts-strip">
+    <div class="wrap facts-grid">
+      <div class="fact">
+        <span class="fact-num">100%</span>
+        <span class="fact-label">wołowina do wyboru, bez domieszek</span>
+      </div>
+      <div class="fact">
+        <span class="fact-num">3</span>
+        <span class="fact-label">formy podania: tortilla, bułka, talerz</span>
+      </div>
+      <div class="fact">
+        <span class="fact-num">6</span>
+        <span class="fact-label">dni w tygodniu otwarte, do 23:00</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu" class="section menu-section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Menu</h2>
+        <p>Kurczak, 100% wołowina albo mix — Ty wybierasz formę i rozmiar.</p>
+      </div>
+
+      <div class="menu-tabs" role="tablist" aria-label="Kategorie menu">
+        <button class="menu-tab is-active" role="tab" aria-selected="true" data-target="burger">Burger</button>
+        <button class="menu-tab" role="tab" aria-selected="false" data-target="tortilla">Tortilla</button>
+        <button class="menu-tab" role="tab" aria-selected="false" data-target="bulka">Bułka</button>
+        <button class="menu-tab" role="tab" aria-selected="false" data-target="talerz">Na talerzu</button>
+        <button class="menu-tab" role="tab" aria-selected="false" data-target="extra">Extra</button>
+        <button class="menu-tab" role="tab" aria-selected="false" data-target="napoje">Napoje</button>
+      </div>
+
+      <!-- BURGER -->
+      <div class="menu-panel is-active" id="burger">
+        <div class="menu-cols">
+          <span></span><span>Standard</span><span>XL</span>
+        </div>
+        <ul class="menu-list">
+          <li><span class="item-name">100% wołowina <em>125g / 180g</em></span><span class="item-price">35 zł</span><span class="item-price">40 zł</span></li>
+          <li><span class="item-name">Kurczak <em>125g / 180g</em></span><span class="item-price">30 zł</span><span class="item-price">35 zł</span></li>
+          <li><span class="item-name">+ Frytki</span><span class="item-price">5 zł</span><span class="item-price">5 zł</span></li>
+        </ul>
+      </div>
+
+      <!-- TORTILLA -->
+      <div class="menu-panel" id="tortilla">
+        <div class="menu-cols">
+          <span></span><span>Standard 170g</span><span>XL 220g</span>
+        </div>
+        <ul class="menu-list">
+          <li><span class="item-name">Kurczak</span><span class="item-price">25 zł</span><span class="item-price">32 zł</span></li>
+          <li><span class="item-name">100% wołowina</span><span class="item-price">30 zł</span><span class="item-price">37 zł</span></li>
+          <li><span class="item-name">Mix</span><span class="item-price">30 zł</span><span class="item-price">37 zł</span></li>
+          <li><span class="item-name">Samo mięso — kurczak <em>200g / 300g</em></span><span class="item-price">25 zł</span><span class="item-price">30 zł</span></li>
+          <li><span class="item-name">Samo mięso — wołowina <em>200g / 300g</em></span><span class="item-price">30 zł</span><span class="item-price">37 zł</span></li>
+        </ul>
+      </div>
+
+      <!-- BUŁKA -->
+      <div class="menu-panel" id="bulka">
+        <div class="menu-cols">
+          <span></span><span>Standard</span><span>XL</span>
+        </div>
+        <ul class="menu-list">
+          <li><span class="item-name">Kurczak</span><span class="item-price">25 zł</span><span class="item-price">32 zł</span></li>
+          <li><span class="item-name">100% wołowina</span><span class="item-price">30 zł</span><span class="item-price">37 zł</span></li>
+          <li><span class="item-name">Mix</span><span class="item-price">30 zł</span><span class="item-price">37 zł</span></li>
+          <li><span class="item-name">Samo mięso — kurczak <em>200g / 300g</em></span><span class="item-price">25 zł</span><span class="item-price">32 zł</span></li>
+          <li><span class="item-name">Samo mięso — wołowina <em>200g / 300g</em></span><span class="item-price">30 zł</span><span class="item-price">37 zł</span></li>
+        </ul>
+      </div>
+
+      <!-- NA TALERZU -->
+      <div class="menu-panel" id="talerz">
+        <div class="menu-cols">
+          <span></span><span>Standard 200g</span><span>XL 250g</span>
+        </div>
+        <ul class="menu-list">
+          <li><span class="item-name">Kurczak</span><span class="item-price">33 zł</span><span class="item-price">40 zł</span></li>
+          <li><span class="item-name">100% wołowina</span><span class="item-price">37 zł</span><span class="item-price">44 zł</span></li>
+          <li><span class="item-name">Mix</span><span class="item-price">37 zł</span><span class="item-price">44 zł</span></li>
+        </ul>
+      </div>
+
+      <!-- EXTRA -->
+      <div class="menu-panel" id="extra">
+        <div class="menu-cols">
+          <span></span><span>Standard</span><span>XL</span>
+        </div>
+        <ul class="menu-list">
+          <li><span class="item-name">Kebab box — kurczak</span><span class="item-price">20 zł</span><span class="item-price">25 zł</span></li>
+          <li><span class="item-name">Kebab box — wołowina</span><span class="item-price">28 zł</span><span class="item-price">30 zł</span></li>
+          <li><span class="item-name">Frytki</span><span class="item-price">7 zł</span><span class="item-price">10 zł</span></li>
+          <li><span class="item-name">Baklawa</span><span class="item-price">6 zł</span><span class="item-price">—</span></li>
+        </ul>
+      </div>
+
+      <!-- NAPOJE -->
+      <div class="menu-panel" id="napoje">
+        <ul class="menu-list menu-list--single">
+          <li><span class="item-name">Cola</span><span class="item-price">7 zł</span></li>
+          <li><span class="item-name">Woda</span><span class="item-price">3 zł</span></li>
+          <li><span class="item-name">Ayran</span><span class="item-price">6 zł</span></li>
+          <li><span class="item-name">Sok owocowy</span><span class="item-price">6 zł</span></li>
+          <li><span class="item-name">Sprite</span><span class="item-price">7 zł</span></li>
+          <li><span class="item-name">Piwo</span><span class="item-price">10 zł</span></li>
+          <li><span class="item-name">Kawa czarna</span><span class="item-price">8 zł</span></li>
+          <li><span class="item-name">Kawa latte</span><span class="item-price">10 zł</span></li>
+        </ul>
+      </div>
+
+      <p class="menu-note"><strong>Dodatki:</strong> ser, frytki — 3 zł &nbsp;|&nbsp; dodatkowe mięso: kurczak 100g — 8 zł, wołowina 100g — 12 zł</p>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="galeria" class="section gallery-section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Zobacz, zanim spróbujesz</h2>
+        <p>Mięso kroimy prosto z rożna, na oczach klienta.</p>
+      </div>
+      <div class="gallery-grid">
+        <figure class="gallery-item gallery-item--tall">
+          <img src="assets/images/skewer.jpg" alt="Kręcący się rożen z mięsem kebabowym w Dünya Döner Krotoszyn">
+          <figcaption>Rożen kręci się cały dzień — kurczak i wołowina, dopiekane na bieżąco.</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img src="assets/images/burger-plate.jpg" alt="Zestaw burgerowy z frytkami i sosami na talerzu">
+          <figcaption>Zestaw burgerowy z frytkami i dwoma sosami — jeden z bestsellerów.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="opinie" class="section reviews-section">
+    <div class="wrap">
+      <div class="section-head section-head--light">
+        <h2>Co mówią klienci</h2>
+        <p>Wybrane opinie z Google — bez podkręcania.</p>
+      </div>
+    </div>
+    <div class="reviews-track">
+      <article class="review-card">
+        <div class="review-stars" aria-label="5 na 5 gwiazdek">★★★★★</div>
+        <p>Świeże składniki, soczyste mięso i konkretna porcja — obsługa też miła, chętnie wracam.</p>
+        <p class="review-author">Hubert K. <span>· miesiąc temu</span></p>
+      </article>
+      <article class="review-card">
+        <div class="review-stars" aria-label="5 na 5 gwiazdek">★★★★★</div>
+        <p>Mięso jest ważone uczciwie — nikt tu nie dostanie mniej niż powinien. Świeże surówki, dobre sosy.</p>
+        <p class="review-author">Dawid K. <span>· rok temu</span></p>
+      </article>
+      <article class="review-card">
+        <div class="review-stars" aria-label="5 na 5 gwiazdek">★★★★★</div>
+        <p>Lokal czysty i nowoczesny, jedzenie świetne, a parking tuż obok — duże ułatwienie.</p>
+        <p class="review-author">Piotr K. <span>· rok temu</span></p>
+      </article>
+      <article class="review-card">
+        <div class="review-stars" aria-label="5 na 5 gwiazdek">★★★★★</div>
+        <p>Zamówienie z dostawą było na miejscu w 15 minut — cienka bułka i idealny stosunek warzyw do mięsa.</p>
+        <p class="review-author">Zenek B. <span>· rok temu</span></p>
+      </article>
+      <article class="review-card">
+        <div class="review-stars" aria-label="5 na 5 gwiazdek">★★★★★</div>
+        <p>Kebab dobrze zapakowany na wynos, dużo miejsca do siedzenia na zewnątrz, obsługa pomocna i miła.</p>
+        <p class="review-author">Malwina M. <span>· rok temu</span></p>
+      </article>
+      <article class="review-card">
+        <div class="review-stars" aria-label="5 na 5 gwiazdek">★★★★★</div>
+        <p>Najlepszy hamburger w mieście — i obsługa na tym samym poziomie.</p>
+        <p class="review-author">Mariusz R. <span>· 10 miesięcy temu</span></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- HOURS + CONTACT -->
+  <section id="godziny" class="section hours-section">
+    <div class="wrap hours-grid">
+
+      <div class="hours-card">
+        <h2>Godziny otwarcia</h2>
+        <table class="hours-table" id="hoursTable">
+          <tbody>
+            <tr data-day="1"><th>Poniedziałek</th><td>Zamknięte</td></tr>
+            <tr data-day="2"><th>Wtorek</th><td>13:00–21:00</td></tr>
+            <tr data-day="3"><th>Środa</th><td>13:00–21:00</td></tr>
+            <tr data-day="4"><th>Czwartek</th><td>13:00–21:00</td></tr>
+            <tr data-day="5"><th>Piątek</th><td>13:00–23:00</td></tr>
+            <tr data-day="6"><th>Sobota</th><td>01:30–23:00</td></tr>
+            <tr data-day="0"><th>Niedziela</th><td>13:00–21:00</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="contact-card">
+        <h2>Adres i zamówienia</h2>
+        <ul class="contact-list">
+          <li>
+            <span class="contact-label">Adres</span>
+            <span class="contact-value">ul. Koźmińska 22b<br>63-700 Krotoszyn</span>
+          </li>
+          <li>
+            <span class="contact-label">Telefon</span>
+            <span class="contact-value"><a href="tel:691081048">691 081 048</a></span>
+          </li>
+        </ul>
+        <div class="contact-buttons">
+          <a href="tel:691081048" class="btn btn-primary">Zadzwoń i zamów</a>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=ul.+Ko%C5%BAmi%C5%84ska+22b%2C+Krotoszyn" target="_blank" rel="noopener" class="btn btn-ghost">Wyznacz trasę</a>
+        </div>
+        <div class="map-embed">
+          <iframe
+            title="Mapa — Dünya Döner Krotoszyn, ul. Koźmińska 22b"
+            src="https://maps.google.com/maps?q=ul.%20Ko%C5%BAmi%C5%84ska%2022b%2C%20Krotoszyn&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <a class="brand brand--footer" href="#top">
+      <img src="assets/images/logo.jpg" alt="Dünya Döner Krotoszyn" class="brand-mark">
+      <span class="brand-name">Dünya Döner<em>Krotoszyn</em></span>
+    </a>
+    <nav class="footer-nav">
+      <a href="#menu">Menu</a>
+      <a href="#galeria">Zdjęcia</a>
+      <a href="#opinie">Opinie</a>
+      <a href="#godziny">Godziny i dojazd</a>
+    </nav>
+    <div class="footer-contact">
+      <a href="tel:691081048">691 081 048</a>
+      <span>ul. Koźmińska 22b, Krotoszyn</span>
+      <!-- TODO: podmień na właściwy link do profilu Facebook -->
+      <a href="#" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </div>
+  <p class="footer-fine">© <span id="year"></span> Dünya Döner Krotoszyn. Wszystkie prawa zastrzeżone.</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ---------- menu tabs ---------- */
+  const tabs = document.querySelectorAll('.menu-tab');
+  const panels = document.querySelectorAll('.menu-panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => { t.classList.remove('is-active'); t.setAttribute('aria-selected', 'false'); });
+      panels.forEach(p => p.classList.remove('is-active'));
+
+      tab.classList.add('is-active');
+      tab.setAttribute('aria-selected', 'true');
+      document.getElementById(tab.dataset.target).classList.add('is-active');
+    });
+  });
+
+  /* ---------- mobile nav ---------- */
+  const navToggle = document.getElementById('navToggle');
+  const mainNav = document.getElementById('mainNav');
+
+  if (navToggle && mainNav) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = mainNav.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    mainNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  /* ---------- open / closed status ----------
+     Godziny (0 = niedziela ... 6 = sobota):
+     0 niedziela   13:00–21:00
+     1 poniedziałek zamknięte
+     2 wtorek      13:00–21:00
+     3 środa       13:00–21:00
+     4 czwartek    13:00–21:00
+     5 piątek      13:00–23:00
+     6 sobota      01:30–23:00
+  ------------------------------------------------ */
+  const HOURS = {
+    0: ['13:00', '21:00'],
+    1: null,
+    2: ['13:00', '21:00'],
+    3: ['13:00', '21:00'],
+    4: ['13:00', '21:00'],
+    5: ['13:00', '23:00'],
+    6: ['01:30', '23:00'],
+  };
+
+  function toMinutes(hhmm) {
+    const [h, m] = hhmm.split(':').map(Number);
+    return h * 60 + m;
+  }
+
+  function updateStatus() {
+    const now = new Date();
+    const day = now.getDay();
+    const nowMinutes = now.getHours() * 60 + now.getMinutes();
+    const todayHours = HOURS[day];
+
+    const pill = document.getElementById('statusPill');
+    const text = document.getElementById('statusText');
+    if (!pill || !text) return;
+
+    let isOpen = false;
+    if (todayHours) {
+      const [open, close] = todayHours.map(toMinutes);
+      isOpen = nowMinutes >= open && nowMinutes < close;
+    }
+
+    pill.classList.toggle('is-open', isOpen);
+    pill.classList.toggle('is-closed', !isOpen);
+
+    if (isOpen) {
+      const closeLabel = todayHours[1];
+      text.textContent = `Otwarte teraz · do ${closeLabel}`;
+    } else if (todayHours) {
+      const openLabel = todayHours[0];
+      text.textContent = `Zamknięte · otwarte od ${openLabel}`;
+    } else {
+      text.textContent = 'Zamknięte dzisiaj';
+    }
+  }
+
+  function highlightToday() {
+    const day = new Date().getDay();
+    const row = document.querySelector(`#hoursTable tr[data-day="${day}"]`);
+    if (row) row.classList.add('is-today');
+  }
+
+  updateStatus();
+  highlightToday();
+  setInterval(updateStatus, 60000);
+
+  /* ---------- footer year ---------- */
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+});
+
+</script>
+</body>
+</html>
